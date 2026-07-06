@@ -4,8 +4,8 @@ import qs.config
 Rectangle {
     id: root
 
-    implicitWidth: 100
-    implicitHeight: 20
+    implicitWidth: 30
+    implicitHeight: 30
 
     property string message: "" // text breaks things.
     property string tooltip: ""
@@ -33,7 +33,7 @@ Rectangle {
                 case Qt.RightButton:
                     console.log("Right clicked!!!")
                     break;
-                case Qt.MiddleButton:
+                case Qt.MiddleButton: //middle button no worky for some reason
                     console.log("m3 clicked!!!")
                     break;
             }

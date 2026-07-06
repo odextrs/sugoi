@@ -1,17 +1,20 @@
 import Quickshell
 import Quickshell.Wayland
 import QtQuick
+import QtQuick.Layouts
+
 import "widgets"
 import qs.widgets
 import qs.config
-
-import QtQuick.Layouts
 
 Scope {
     Variants {
         model: Quickshell.screens
 
         SugoiPanelWindow {
+            required property var modelData //IMPORTANT!!
+            screen: modelData
+
             color: '#71020514'
 
             anchors {
@@ -23,20 +26,17 @@ Scope {
 
             implicitWidth: 36
 
-            Grid {
-                anchors {
-                    right: ShellStates.flags.bar.barVertical ? undefined : parent.right
-                    bottom: ShellStates.flags.bar.barVertical ? parent.bottom : undefined
-                    horizontalCenter: ShellStates.flags.bar.barVertical ? parent.horizontalCenter : undefined
-                    verticalCenter: ShellStates.flags.bar.barVertical ? undefined : parent.verticalCenter
-                }
-
+            GridLayout {
+                anchors.fill: parent
                 columns: ShellStates.flags.bar.barVertical
                 rows: !ShellStates.flags.bar.barVertical
-                spacing: 4
 
-                BarSystemTray {}
-                Clock {}
+                columnSpacing: 0
+                rowSpacing: 0
+
+                SectionStart {}
+                SectionCenter {}
+                SectionEnd {}
             }
         }
     }
