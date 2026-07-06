@@ -14,7 +14,7 @@ Singleton {
         id: jsonAdapter
 
         property JsonObject bar: JsonObject {
-            property bool barVertical: false
+            property bool barVertical: true
             property bool barFloating: false
             property bool floatingWidgets: false
             property bool floatingCorners: false

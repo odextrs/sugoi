@@ -4,7 +4,10 @@ import qs.config
 Rectangle {
     id: root
 
-    property string text: ""
+    implicitWidth: 100
+    implicitHeight: 20
+
+    property string message: "" // text breaks things.
     property string tooltip: ""
 
     Behavior on color {
@@ -14,16 +17,13 @@ Rectangle {
         }
     }
 
-    // vv replace with SugoiText because SugoiText :thumbsup: 👍
     SugoiText {
-        text: text
+        text: message
+        font.pixelSize: 16
     }
 
     MouseArea {
         anchors.fill: parent
-        ///  so if I remove one of these, its no longer accepted
-        // nope
-        // oh shit since this is a qs.widget we should add a property
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked: (mouse) => {
             switch (mouse.button) {
@@ -35,13 +35,9 @@ Rectangle {
                     break;
                 case Qt.MiddleButton:
                     console.log("m3 clicked!!!")
+                    break;
             }
         }
     }
 }
 //https://doc.qt.io/qt-6/qml-qtquick-mousearea.html
-//maybe add right click and middle click function too, like just a place holder
-// hm/
-// wait im looking at DMS implementation, we dont need m1 m2 m3 hmmm
-// well we do if we want to have m2 menus, but where tho
-//oh shit also icon and text

@@ -1,28 +1,57 @@
 import Quickshell
+import Quickshell.Widgets
 import QtQuick
+
+import qs.widgets
+import qs.config
 
 import Quickshell.Services.SystemTray
 
-// very basic
+SugoiRectangle {
+    implicitWidth: content.width
+    implicitHeight: content.height
 
-Grid {
-    columns: 1
-    rows: 0
+    Grid {
+        id: content
+        anchors.centerIn: parent
+        columns: ShellStates.flags.bar.barVertical
+        rows: !ShellStates.flags.bar.barVertical
+        spacing: 4
 
-    Repeater {
-        model: SystemTray.items
+        Repeater {
+            model: SystemTray.items
 
-        Item {
-            IconImage {
-                source: modelData.icon
-                implicitSize: 14
+            Item {
+                implicitWidth: appIcon.width
+                implicitHeight: appIcon.height
+
+                IconImage {
+                    id: appIcon
+                    source: modelData.icon
+                    implicitSize: 18
+                }
+
+                LazyLoader {
+                    id: appMenu
+                    active: false
+
+                    // experiment
+                    PopupWindow {
+                        anchor.item: appIcon
+                        color: 'red'
+                        implicitWidth: 200
+                        implicitHeight: 200
+                    }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: () => {
+                        console.log("beep");
+                    }
+                }
+
             }
-
-            // for the menu
-            LazyLoader {
-                loading: false
-            }
-
         }
     }
 }
