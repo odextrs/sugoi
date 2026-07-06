@@ -14,8 +14,12 @@ Scope {
         SugoiPanelWindow {
             required property var modelData //IMPORTANT!!
             screen: modelData
-
-            color: '#71020514'
+            color: "transparent"
+            
+            SugoiRectangle {
+                anchors.fill: parent
+                opacity: 0.7
+            }
 
             anchors {
                 top: true
@@ -24,7 +28,7 @@ Scope {
                 right: !ShellStates.flags.bar.barVertical
             }
 
-            implicitWidth: 36
+            implicitWidth: 40 //36
 
             GridLayout {
                 anchors.fill: parent

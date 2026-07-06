@@ -19,17 +19,18 @@ Item {
     Grid {
         columns: ShellStates.flags.bar.barVertical
         rows: !ShellStates.flags.bar.barVertical
-        horizontalItemAlignment: ShellStates.flags.bar.barVertical? Grid.AlignHCenter : undefined
-        verticalItemAlignment: ShellStates.flags.bar.barVertical? undefined : Grid.AlignVCenter
+        horizontalItemAlignment: Grid.AlignHCenter
+        verticalItemAlignment: Grid.AlignVCenter
 
         anchors {
             right: ShellStates.flags.bar.barVertical ? undefined : parent.right
             bottom: ShellStates.flags.bar.barVertical ? parent.bottom : undefined
             horizontalCenter: ShellStates.flags.bar.barVertical ? parent.horizontalCenter : undefined
             verticalCenter: ShellStates.flags.bar.barVertical ? undefined : parent.verticalCenter
+            bottomMargin: ShellStates.flags.bar.barVertical? 6 : undefined
         }
 
-        spacing: 8
+        spacing: 4
 
         BarSystemTray {}
         Clock {}

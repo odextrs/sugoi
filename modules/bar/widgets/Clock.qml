@@ -7,6 +7,7 @@ import qs.config
 SugoiRectangle {
     implicitWidth: content.width
     implicitHeight: content.height
+    color: "transparent"
 
     Grid {
         id: content
@@ -17,13 +18,11 @@ SugoiRectangle {
         SugoiText {
             text: Qt.formatDateTime(clock.date, "hh")
             font.pixelSize: 14
-            color: "white"
         }
 
         SugoiText {
             text: Qt.formatDateTime(clock.date, "mm")
             font.pixelSize: 14
-            color: "white"
         }
     }
 

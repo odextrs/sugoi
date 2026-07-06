@@ -1,10 +1,13 @@
 import Quickshell
 import QtQuick
 import qs.widgets
+import qs.config
 
 // todo: button and quick settings panel
 
 SugoiButton {
-    //implicitHeight: 30
-    //implicitWidth: parent.width
+    message: ""
+    messageSize: 20
+    messageColor: Colour.primary
+    buttonBackground: "transparent"
 }

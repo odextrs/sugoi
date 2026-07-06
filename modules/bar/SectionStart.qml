@@ -19,8 +19,8 @@ Item {
     Grid {
         columns: ShellStates.flags.bar.barVertical
         rows: !ShellStates.flags.bar.barVertical
-        horizontalItemAlignment: ShellStates.flags.bar.barVertical? Grid.AlignHCenter : undefined
-        verticalItemAlignment: ShellStates.flags.bar.barVertical? undefined : Grid.AlignVCenter
+        horizontalItemAlignment: Grid.AlignHCenter
+        verticalItemAlignment: Grid.AlignVCenter
         anchors {
             left: ShellStates.flags.bar.barVertical ? undefined : parent.left
             top: ShellStates.flags.bar.barVertical ? parent.top : undefined

@@ -7,7 +7,12 @@ Rectangle {
     implicitWidth: 30
     implicitHeight: 30
 
+    color: buttonBackground
+
+    property string buttonBackground: Colour.primary
     property string message: "" // text breaks things.
+    property int messageSize: 16
+    property string messageColor: Colour.primaryOn
     property string tooltip: ""
 
     Behavior on color {
@@ -19,7 +24,9 @@ Rectangle {
 
     SugoiText {
         text: message
-        font.pixelSize: 16
+        font.pixelSize: messageSize
+        color: messageColor
+        anchors.centerIn: parent
     }
 
     MouseArea {
