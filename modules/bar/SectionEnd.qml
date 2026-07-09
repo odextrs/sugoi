@@ -32,8 +32,20 @@ Item {
 
         spacing: 4
 
+        // -- modules
         BarSystemTray {}
         Clock {}
-        QuickSettings {}
+
+        // -- quick settings button
+        SugoiButton {
+            message: ""
+            messageSize: 20
+            messageColor: Colour.primary
+            buttonBackground: "transparent"
+
+            onLeftClicked: {
+                QuickSettings.toggle()
+            }
+        }   
     }
 }

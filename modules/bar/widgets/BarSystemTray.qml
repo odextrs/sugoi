@@ -53,7 +53,7 @@ SugoiRectangle {
                     }
 
                 //this works but optimization..?
-                /*SugoiPopup {
+                SugoiPopup {
                     id: trayPopup
 
                     _trayItem: trayItem
@@ -73,7 +73,7 @@ SugoiRectangle {
                             }
                         }
                     }
-                }*/
+                }
             }
         }
     }

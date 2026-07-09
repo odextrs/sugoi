@@ -13,7 +13,7 @@ SugoiPanelWindow {
     id: root
     color: "transparent"
 
-    implicitWidth: 400
+    implicitWidth: 350
     implicitHeight: Math.max(0, notifications.height)
 
     anchors {

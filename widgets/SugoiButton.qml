@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import qs.config
 
@@ -9,11 +11,19 @@ Rectangle {
 
     color: buttonBackground
 
-    property string buttonBackground: Colour.primary
+    radius: 4
+    
+    readonly property bool hovered: mArea.containsMouse
+
+    property color buttonBackground: Colour.primary
     property string message: "" // text breaks things.
     property int messageSize: 16
-    property string messageColor: Colour.primaryOn
+    property color messageColor: Colour.primaryOn
     property string tooltip: ""
+
+    signal leftClicked()
+    signal rightClicked()
+    signal middleClicked()
 
     Behavior on color {
         ColorAnimation {
@@ -25,23 +35,28 @@ Rectangle {
     SugoiText {
         text: message
         font.pixelSize: messageSize
-        color: messageColor
+        color: root.messageColor
         anchors.centerIn: parent
-    }
+    }    
 
     MouseArea {
+        id: mArea
         anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
+        hoverEnabled: true
+
         onClicked: (mouse) => {
             switch (mouse.button) {
                 case Qt.LeftButton:
-                    console.log("m1 registered")
+                    root.leftClicked()
                     break;
                 case Qt.RightButton:
                     console.log("Right clicked!!!")
+                    root.rightClicked()
                     break;
-                case Qt.MiddleButton: //middle button no worky for some reason
+                case Qt.MiddleButton:
                     console.log("m3 clicked!!!")
+                    root.middleClicked()
                     break;
             }
         }

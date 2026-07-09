@@ -7,7 +7,7 @@ Text {
     font.family: jetBrainsMono.font
     color: messageColor
 
-    property string messageColor: Colour.primary
+    property color messageColor: Colour.primary
 
     FontLoader {
         id: jetBrainsMono
