@@ -94,7 +94,7 @@ SugoiPanelWindow {
 
                     MediaPlayer {
                         id: someSound
-                        source: "../../assets/audio/47313572-notification-2-269292.mp3" // you tell me if we should rename it to notification.mp3
+                        source: "../../assets/audio/notification.wav"
                         autoPlay: true
                         audioOutput: AudioOutput {
                             volume: 1.0

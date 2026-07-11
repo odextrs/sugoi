@@ -16,10 +16,12 @@ Scope {
     property bool toggled: false
     property int currentPage: 0
     readonly property var pageComponents: [
-        mainPanelComp
+        mainPanelComp,
+        mediaPanelComp
     ]
 
     Component { id: mainPanelComp; MainPanel{} }
+    Component { id: mediaPanelComp; MediaPanel{} }
 
     function toggle() {
         toggled = !toggled

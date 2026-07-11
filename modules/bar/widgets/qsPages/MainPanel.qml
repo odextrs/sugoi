@@ -12,32 +12,47 @@ Item {
     Layout.fillHeight: true
 
     GridLayout {
-        columns: 2
-        rows: 4
+        columns: 3
+        //rows: 4
         anchors.centerIn: parent
 
-        QsButton {
-            message: "1"
+        ProfileIcon {
+            Layout.rowSpan: 2 //columnSpan also exists, thats cool :thumbsup:
         }
 
         QsButton {
-            message: "1"
+            message: ""
+            messageSize: 32
+            implicitWidth: 85
         }
 
         QsButton {
-            message: "1"
+            message: "⏻"
+            implicitWidth: 60
+            messageSize: 32
+            //buttonBackground: "transparent"
         }
 
         QsButton {
-            message: "1"
+            message: "󰂯"
+            messageSize: 24
+            implicitWidth: 85
         }
 
         QsButton {
-            message: "1"
+            message: ""
+            implicitWidth: 60
+            messageSize: 32
+            //buttonBackground: "transparent"
         }
 
         QsButton {
-            message: "1"
+            message: "we"
+        }
+
+        QsButton {
+            Layout.columnSpan: 2
+            message: "wewe"
         }
     }
 }

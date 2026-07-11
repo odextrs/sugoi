@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell
 import QtQuick
 import qs.config
 
@@ -27,7 +28,7 @@ Rectangle {
 
     Behavior on color {
         ColorAnimation {
-            duration: 500
+            duration: 300
             easing.type: Easing.BezierSpline
         }
     }
@@ -37,7 +38,7 @@ Rectangle {
         font.pixelSize: messageSize
         color: root.messageColor
         anchors.centerIn: parent
-    }    
+    }
 
     MouseArea {
         id: mArea
