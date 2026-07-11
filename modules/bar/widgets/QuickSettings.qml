@@ -36,18 +36,28 @@ Scope {
         visible: toggled
         exclusiveZone: 0
 
-        /*Behavior on visible {
+        property int slideOffset: toggled ? 10 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight
+
+        Behavior on slideOffset {
             NumberAnimation {
-                //duration: 500
-                //easing.type: Easing.BezierSpline
+                id: slideY
+                duration: 250
+                easing.type: Easing.OutCubic
             }
-        }*/
+        }
 
         anchors {
             bottom: ShellStates.flags.bar.barVertical
             left: ShellStates.flags.bar.barVertical
             top: !ShellStates.flags.bar.barVertical
             right: !ShellStates.flags.bar.barVertical
+        }
+
+        margins {
+            left: ShellStates.flags.bar.barVertical ? slideOffset : 10
+            bottom: 10
+            top: ShellStates.flags.bar.barVertical ? 10 : slideOffset
+            right: 10
         }
 
         Row {
@@ -62,6 +72,8 @@ Scope {
                     Colour.surface.b,
                     0.7
                 )
+                topLeftRadius: 8
+                bottomLeftRadius: 8
 
                 Column {
                     anchors.centerIn: parent
@@ -92,7 +104,8 @@ Scope {
             }
 
             SugoiRectangle {
-                topRightRadius: 4
+                topRightRadius: 8
+                bottomRightRadius: 8
                 implicitWidth: bkg.width - 50
                 implicitHeight: bkg.height
                 color: Qt.rgba (
