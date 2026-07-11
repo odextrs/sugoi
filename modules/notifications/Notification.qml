@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Wayland
 import QtMultimedia
 import Quickshell.Services.Notifications
 
@@ -15,15 +16,18 @@ SugoiPanelWindow {
 
     implicitWidth: 350
     implicitHeight: Math.max(0, notifications.height)
+    exclusiveZone: 0
+
+    BackgroundEffect.blurRegion: Region { item: notifications }
 
     anchors {
         top: true
-        right: true
+        //right: true
     }
 
     margins {
-        top: 12
-        right: 12
+        top: 10
+        //right: 10
     }
 
     ColumnLayout {

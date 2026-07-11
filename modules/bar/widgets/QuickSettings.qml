@@ -36,6 +36,8 @@ Scope {
         visible: toggled
         exclusiveZone: 0
 
+        BackgroundEffect.blurRegion: Region { item: row }
+
         property int slideOffset: toggled ? 10 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight
 
         Behavior on slideOffset {
@@ -61,6 +63,7 @@ Scope {
         }
 
         Row {
+            id: row
             spacing: 0
 
             SugoiRectangle {

@@ -16,7 +16,10 @@ Scope {
             screen: modelData
             color: "transparent"
             
+            BackgroundEffect.blurRegion: Region { item: panel }
+
             SugoiRectangle {
+                id: panel
                 anchors.fill: parent
                 opacity: 0.7
             }
