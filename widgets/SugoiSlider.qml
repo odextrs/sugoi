@@ -36,8 +36,7 @@ Item {
         id: trackArea
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: labelText.bottom
-        anchors.topMargin: 10
+        anchors.top: parent.top
         height: 6
 
         Rectangle {
@@ -73,14 +72,13 @@ Item {
             scale: sliderMa.containsMouse || sliderMa.pressed ? 1.2 : 1.0
 
             Behavior on scale {
-                NumberAnimation { duration: Animations.snap; easing.type: Easing.OutBack; easing.overshoot: Animations.springPower }
+                NumberAnimation { duration: 200; easing.type: Easing.OutBack; easing.overshoot: 1.2 }
             }
         }
 
         MouseArea {
             id: sliderMa
             anchors.fill: parent
-            anchors.margins: -8
             hoverEnabled: true
             cursorShape: Qt.PointingHandCursor
             preventStealing: true

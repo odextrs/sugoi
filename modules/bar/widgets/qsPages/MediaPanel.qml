@@ -23,6 +23,16 @@ Item {
         return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : "";
     }
 
+    function formatTime(seconds) {
+        if (!seconds || isNaN(seconds))
+            return "0:00";
+
+        let mins = Math.floor(seconds / 60);
+        let secs = Math.floor(seconds % 60);
+
+        return mins + ":" + (secs < 10 ? "0" : "") + secs;
+    }
+
     GridLayout {
         columns: 2
         //rows: 3
@@ -107,13 +117,29 @@ Item {
                 }
             }
 
-            SugoiText {
-                Layout.preferredWidth: 300
-                Layout.maximumWidth: 300
-                text: activePlayer?.trackArtist
-                elide: Text.ElideRight
-                font.pixelSize: 10
-                isMonospace: false
+            GridLayout {
+                columns: 2
+                rows: 1
+
+                SugoiText {
+                    Layout.preferredWidth: 260
+                    Layout.maximumWidth: 260
+                    text: activePlayer?.trackArtist
+                    elide: Text.ElideRight
+                    font.pixelSize: 10
+                    isMonospace: false
+                }
+
+                SugoiText {
+                    Layout.alignment: Qt.AlignRight
+                    Layout.preferredWidth: 40
+                    Layout.maximumWidth: 40
+                    color: Colour.outlineVariant
+                    text: formatTime(activePlayer?.length)
+                    elide: Text.ElideRight
+                    font.pixelSize: 10
+                    isMonospace: false
+                }
             }
         }
     }
