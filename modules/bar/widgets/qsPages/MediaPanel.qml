@@ -14,6 +14,25 @@ Item {
 
     readonly property list<MprisPlayer> availablePlayers: Mpris.players.values
     property MprisPlayer activePlayer: availablePlayers.find(p => p.isPlaying) ?? availablePlayers.find(p => p.canControl && p.canPlay) ?? null
+    // A temporary (probably) fix for the firefox mpris problem
+    property real peakLength: 0
+
+    Connections {
+        target: activePlayer
+
+        function onUniqueIdChanged() {
+            console.log("something changed here....")
+            peakLength = activePlayer.length
+        }
+
+        function onLengthChanged() {
+            if (activePlayer.lengthSupported && activePlayer.length > peakLength) {
+                console.log("im doing smt here");
+                peakLength = activePlayer.length
+            }
+        }
+    }
+
     readonly property url artUrl: activePlayer?.metadata["xesam:url"] ?? ""
 
     //fallback to get directly from youtube, since firefox doesn't expose Mpris.artUrl
@@ -107,13 +126,14 @@ Item {
             }
 
             SugoiSlider {
-                maxValue: activePlayer?.length ?? 0
+                maxValue: peakLength //activePlayer?.length ?? 0
                 value: activePlayer?.position ?? 0
                 width: 300
 
                 onValueModified: value => {
                     if (activePlayer)
-                        activePlayer.seek(value - activePlayer.position)
+                        activePlayer.position = value
+                        //activePlayer.seek(value - activePlayer.position)
                 }
 
                 Timer {
@@ -142,7 +162,7 @@ Item {
                     Layout.preferredWidth: 40
                     Layout.maximumWidth: 40
                     color: Colour.outlineVariant
-                    text: formatTime(activePlayer?.length)
+                    text: formatTime(peakLength)// formatTime(activePlayer?.length)
                     elide: Text.ElideRight
                     font.pixelSize: 10
                     isMonospace: false
