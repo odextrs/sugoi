@@ -23,6 +23,11 @@ Scope {
     Component { id: mainPanelComp; MainPanel{} }
     Component { id: mediaPanelComp; MediaPanel{} }
 
+    Shortcut {
+        sequence: "Escape"
+        onActivated: toggle()
+    }
+
     function toggle() {
         toggled = !toggled
         console.log ("qs toggle")

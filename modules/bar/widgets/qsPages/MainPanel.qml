@@ -31,6 +31,9 @@ Item {
             implicitWidth: 60
             messageSize: 32
             //buttonBackground: "transparent"
+            onLeftClicked: {
+                PowerMenu.toggle()
+            }
         }
 
         QsButton {

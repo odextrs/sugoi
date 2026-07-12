@@ -14,12 +14,13 @@ Rectangle {
 
     radius: 4
     
+    property bool hoverEnabled: true
     readonly property bool hovered: mArea.containsMouse
 
-    property color buttonBackground: Colour.primary
+    property color buttonBackground: hoverEnabled && root.hovered ? Colour.secondaryContainer : Colour.primary
     property string message: "" // text breaks things.
     property int messageSize: 16
-    property color messageColor: Colour.primaryOn
+    property color messageColor: hoverEnabled && root.hovered ? Colour.primary : Colour.secondaryOn
     property string tooltip: ""
 
     signal leftClicked()
@@ -28,7 +29,7 @@ Rectangle {
 
     Behavior on color {
         ColorAnimation {
-            duration: 300
+            duration: 100
             easing.type: Easing.BezierSpline
         }
     }

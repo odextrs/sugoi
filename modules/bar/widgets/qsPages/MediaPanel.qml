@@ -62,14 +62,14 @@ Item {
             QsButton {
                 message: "󰼨"
                 buttonBackground: "transparent"
-                onLeftClicked: { activePlayer.previous() }
+                onLeftClicked: { activePlayer?.previous() }
                 implicitHeight: 36
                 implicitWidth: 36
             }
 
             QsButton {
-                message: activePlayer.isPlaying? "󰏤" : "󰐊"
-                onLeftClicked: { activePlayer.togglePlaying() }
+                message: activePlayer ? activePlayer.isPlaying ? "󰏤" : "󰐊" : "󰐊"
+                onLeftClicked: { activePlayer?.togglePlaying() }
                 implicitHeight: 36
                 implicitWidth: 36
             }
@@ -77,7 +77,7 @@ Item {
             QsButton {
                 message: "󰼧"
                 buttonBackground: "transparent"
-                onLeftClicked: { activePlayer.next() }
+                onLeftClicked: { activePlayer?.next() }
                 implicitHeight: 36
                 implicitWidth: 36
             }
@@ -99,7 +99,7 @@ Item {
             }*/
 
             SugoiText {
-                text: activePlayer?.trackTitle
+                text: activePlayer ? activePlayer.trackTitle : "No media playing."
                 elide: Text.ElideRight
                 isMonospace: false
                 Layout.preferredWidth: 300
