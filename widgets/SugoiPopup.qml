@@ -6,13 +6,14 @@ import qs.widgets
 
 //TODO: open on the side of the bar instead of on top
 //TODO: sliding animation
-//TODO: click outside the window / Press ESC to close the Popup
+//TODO: ~~click outside the window~~ / Press ESC to close the Popup
 PopupWindow {
     id: trayPopup
     required property Item _trayItem
     required property var _menuOpener
 
     visible: false
+    grabFocus: true
     anchor.item: _trayItem
     implicitWidth: 200
     implicitHeight: {
@@ -94,5 +95,11 @@ PopupWindow {
                 }
             }
         }
+    }
+
+    // nope. this does not really work.
+    Shortcut {
+        sequence: "Escape"
+        onActivated: trayPopup.visible = false
     }
 }

@@ -7,10 +7,7 @@ import qs.config
 
 import Quickshell.Widgets
 
-
-// Always experimenting
 Scope {
-
     property bool isActive: false;
 
     LazyLoader {
@@ -89,6 +86,11 @@ Scope {
                     }
                 }
             }
+        }
+
+        Shortcut {
+            sequence: "Escape"
+            onActivated: isActive = !isActive
         }
     }
 

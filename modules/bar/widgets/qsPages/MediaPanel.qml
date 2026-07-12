@@ -113,7 +113,14 @@ Item {
 
                 onValueModified: value => {
                     if (activePlayer)
-                        activePlayer.seek((value - activePlayer.position))
+                        activePlayer.seek(value - activePlayer.position)
+                }
+
+                Timer {
+                    running: activePlayer.playbackState == MprisPlaybackState.Playing
+                    repeat: true
+                    interval: 1000
+                    onTriggered: activePlayer.positionChanged();
                 }
             }
 

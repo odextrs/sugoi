@@ -28,5 +28,9 @@ Singleton {
         property JsonObject notifications: JsonObject {
             property bool isActive: true
         }
+
+        property JsonObject appLauncher: JsonObject {
+            property bool isActive: true
+        }
     }
 }

@@ -34,23 +34,10 @@ SugoiRectangle {
                     implicitSize: 18
                 }
 
-                LazyLoader {
-                    id: appMenu
-                    active: false
-
-                    // experiment
-                    /*PopupWindow {
-                        anchor.item: appIcon
-                        color: 'red'
-                        implicitWidth: 200
-                        implicitHeight: 200
-                    }*/    
-                }
-
                 QsMenuOpener {
-                        id: menuOpener
-                        menu: modelData.hasMenu? modelData.menu : null
-                    }
+                    id: menuOpener
+                    menu: modelData.hasMenu? modelData.menu : null
+                }
 
                 //this works but optimization..?
                 SugoiPopup {
@@ -65,12 +52,9 @@ SugoiRectangle {
                     onClicked: () => {
                         console.log("beep");
                         if (modelData.hasMenu) {
+                            if (activePopup) activePopup.visible = false;
                             trayPopup.visible = !trayPopup.visible
-                            if (trayPopup.visible) {
-                                activePopup = trayPopup
-                            } else {
-                                activePopup = null
-                            }
+                            activePopup = trayPopup.visible ? trayPopup : null
                         }
                     }
                 }
