@@ -17,16 +17,16 @@ Item {
     // A temporary (probably) fix for the firefox mpris problem
     property real peakLength: 0
 
+    onActivePlayerChanged: {
+        if (activePlayer.lengthSupported)
+            peakLength = activePlayer.length;
+    }
+
     Connections {
         target: activePlayer
 
-        function onUniqueIdChanged() {
-            console.log("something changed here....")
-            peakLength = activePlayer.length
-        }
-
         function onLengthChanged() {
-            if (activePlayer.lengthSupported && activePlayer.length > peakLength) {
+            if (activePlayer.lengthSupported) {
                 console.log("im doing smt here");
                 peakLength = activePlayer.length
             }

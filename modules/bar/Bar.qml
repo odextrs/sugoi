@@ -31,7 +31,7 @@ Scope {
                 right: !ShellStates.flags.bar.barVertical
             }
 
-            implicitWidth: 40 //36
+            implicitWidth: ShellStates.flags.bar.barWidth
 
             GridLayout {
                 anchors.fill: parent

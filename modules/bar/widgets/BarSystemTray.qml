@@ -43,6 +43,8 @@ SugoiRectangle {
                 SugoiPopup {
                     id: trayPopup
 
+                    grabFocus: true
+
                     _trayItem: trayItem
                     _menuOpener: menuOpener
                 }
@@ -52,7 +54,8 @@ SugoiRectangle {
                     onClicked: () => {
                         console.log("beep");
                         if (modelData.hasMenu) {
-                            if (activePopup) activePopup.visible = false;
+                            if (activePopup && activePopup != trayPopup)
+                                activePopup.visible = false;
                             trayPopup.visible = !trayPopup.visible
                             activePopup = trayPopup.visible ? trayPopup : null
                         }

@@ -4,34 +4,41 @@ import QtQuick
 import qs.config
 import qs.widgets
 
-//TODO: open on the side of the bar instead of on top
 //TODO: sliding animation
-//TODO: ~~click outside the window~~ / Press ESC to close the Popup
+//TODO: Press ESC to close the Popup
 PopupWindow {
     id: trayPopup
     required property Item _trayItem
-    required property var _menuOpener
+    required property var _menuOpener 
 
     visible: false
-    grabFocus: true
     anchor.item: _trayItem
+    anchor.rect.x: ShellStates.flags.bar.barWidth - _trayItem.width / 2
     implicitWidth: 200
-    implicitHeight: {
+    /*implicitHeight: {
         const items = _menuOpener.children.values
         const vis = items.filter((e, i) => !(e.isSeparator && (i === 0 || i === items.length - 1)))
         return vis.reduce((sum, e) => sum + (e.isSeparator ? 9 : 32), 0 + Math.max(0, vis.length - 1) * 2 + 8)
-    }
+    }*/
+    implicitHeight: menuRectangle.height
 
     color: "transparent"
 
     SugoiRectangle { //background
         id: menuRectangle
-        anchors.fill: parent
+        //anchors.fill: parent
+        implicitHeight: reality.height + 8
+        implicitWidth: trayPopup.width
+
         radius: 4
         Column {
-            anchors.fill: parent
-            anchors.margins: 4
+            id: reality
+            anchors.centerIn: parent
+            //anchors.fill: parent
+            //anchors.margins: 4
             spacing: 2
+
+            width: parent.width - 8
 
             Repeater {
                 model: _menuOpener.children
@@ -66,7 +73,6 @@ PopupWindow {
                             spacing: 8
 
                             IconImage {
-                                //visible: modelData.icon =/= ""
                                 source: modelData.icon
                                 implicitSize: 16
                             }
@@ -95,11 +101,5 @@ PopupWindow {
                 }
             }
         }
-    }
-
-    // nope. this does not really work.
-    Shortcut {
-        sequence: "Escape"
-        onActivated: trayPopup.visible = false
     }
 }

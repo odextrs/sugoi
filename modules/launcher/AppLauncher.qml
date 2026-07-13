@@ -78,7 +78,10 @@ Scope {
                             MouseArea {
                                 anchors.fill: parent
                                 hoverEnabled: true
-                                onClicked: modelData.execute()
+                                onClicked: {
+                                    modelData.execute();
+                                    isActive = false;
+                                }
                                 onEntered: appItem.color = Colour.surfaceVariant
                                 onExited: appItem.color = Colour.surface
                             }
@@ -90,7 +93,7 @@ Scope {
 
         Shortcut {
             sequence: "Escape"
-            onActivated: isActive = !isActive
+            onActivated: isActive = false
         }
     }
 

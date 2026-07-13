@@ -22,12 +22,10 @@ SugoiPanelWindow {
 
     anchors {
         top: true
-        //right: true
     }
 
     margins {
         top: 10
-        //right: 10
     }
 
     ColumnLayout {
