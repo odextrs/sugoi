@@ -27,7 +27,6 @@ Item {
 
         function onLengthChanged() {
             if (activePlayer.lengthSupported) {
-                console.log("im doing smt here");
                 peakLength = activePlayer.length
             }
         }

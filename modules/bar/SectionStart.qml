@@ -26,6 +26,9 @@ Item {
             top: ShellStates.flags.bar.barVertical ? parent.top : undefined
             horizontalCenter: ShellStates.flags.bar.barVertical ? parent.horizontalCenter : undefined
             verticalCenter: ShellStates.flags.bar.barVertical ? undefined : parent.verticalCenter
+            topMargin: ShellStates.flags.bar.barVertical ? 6 : undefined
         }
+
+        Workspace {}
     }
 }

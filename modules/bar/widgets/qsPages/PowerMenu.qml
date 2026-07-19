@@ -37,19 +37,7 @@ Scope {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
                 hoverEnabled: true
 
-                onClicked: (mouse) => {
-                    switch (mouse.button) {
-                        case Qt.LeftButton:
-                            toggled = false
-                            break;
-                        case Qt.RightButton:
-                            toggled = false
-                            break;
-                        case Qt.MiddleButton:
-                            toggled = false
-                            break;
-                    }
-                }
+                onClicked: (mouse) => toggled = false;
             }
 
             property int slideOffset: toggled ? 0 : -implicitHeight
