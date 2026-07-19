@@ -31,12 +31,13 @@ Scope {
                 right: !ShellStates.flags.bar.barVertical
             }
 
-            implicitWidth: ShellStates.flags.bar.barWidth
+            implicitWidth: ShellStates.flags.bar.barVertical ? ShellStates.flags.bar.barSize : undefined
+            implicitHeight: !ShellStates.flags.bar.barVertical ? ShellStates.flags.bar.barSize : undefined
 
             GridLayout {
                 anchors.fill: parent
-                columns: ShellStates.flags.bar.barVertical
-                rows: !ShellStates.flags.bar.barVertical
+                columns: ShellStates.flags.bar.barVertical ? 1 : 3
+                rows: ShellStates.flags.bar.barVertical ? 3 : 1
 
                 columnSpacing: 0
                 rowSpacing: 0

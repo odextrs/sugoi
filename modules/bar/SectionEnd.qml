@@ -28,9 +28,10 @@ Item {
             horizontalCenter: ShellStates.flags.bar.barVertical ? parent.horizontalCenter : undefined
             verticalCenter: ShellStates.flags.bar.barVertical ? undefined : parent.verticalCenter
             bottomMargin: ShellStates.flags.bar.barVertical? 6 : undefined
+            rightMargin: ShellStates.flags.bar.barVertical? undefined : 8
         }
 
-        spacing: 4
+        spacing: ShellStates.flags.bar.barVertical? 4 : 8
 
         // -- modules
         BarSystemTray {}

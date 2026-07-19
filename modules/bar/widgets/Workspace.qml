@@ -1,12 +1,14 @@
 import Quickshell
 import Quickshell.Io
+import Quickshell.Wayland
 import QtQuick
 
 import qs.widgets
 import qs.config
 
 Rectangle {
-    color: "transparent"
+    color: Colour.surfaceContainerHigh
+    radius: 8
     height: workspaceGrid.height
     width: workspaceGrid.width
 
@@ -39,8 +41,8 @@ Rectangle {
 
     Grid {
         id: workspaceGrid
-        columns: 1
-        rows: 0
+        columns: ShellStates.flags.bar.barVertical ? 1 : workspacesData.length
+        rows: ShellStates.flags.bar.barVertical ? workspacesData.length : 1
 
         spacing: 4
         anchors.centerIn: parent

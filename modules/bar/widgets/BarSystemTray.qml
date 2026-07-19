@@ -9,9 +9,10 @@ import Quickshell.Services.SystemTray
 
 SugoiRectangle {
     property var activePopup: null
-    implicitWidth: content.width
-    implicitHeight: content.height
-    color: "transparent"
+    implicitWidth: content.width + 8
+    implicitHeight: content.height + 8
+    color: Colour.surfaceContainerHigh //"transparent"
+    radius: 8
 
     Grid {
         id: content

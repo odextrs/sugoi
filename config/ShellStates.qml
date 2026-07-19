@@ -17,7 +17,7 @@ Singleton {
             property bool isActive: true
             property bool barVertical: true
             property bool barFloating: false
-            property int barWidth: 40
+            property int barSize: 40
             property bool floatingWidgets: false
             property bool floatingCorners: false
 
