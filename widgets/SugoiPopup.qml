@@ -13,13 +13,8 @@ PopupWindow {
 
     visible: false
     anchor.item: _trayItem
-    anchor.rect.x: ShellStates.flags.bar.barWidth - _trayItem.width / 2
+    anchor.rect.x: ShellStates.flags.bar.barSize - _trayItem.width / 2
     implicitWidth: 200
-    /*implicitHeight: {
-        const items = _menuOpener.children.values
-        const vis = items.filter((e, i) => !(e.isSeparator && (i === 0 || i === items.length - 1)))
-        return vis.reduce((sum, e) => sum + (e.isSeparator ? 9 : 32), 0 + Math.max(0, vis.length - 1) * 2 + 8)
-    }*/
     implicitHeight: menuRectangle.height
 
     color: "transparent"
