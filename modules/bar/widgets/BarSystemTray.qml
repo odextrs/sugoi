@@ -11,7 +11,7 @@ SugoiRectangle {
     property var activePopup: null
     implicitWidth: content.width + 8
     implicitHeight: content.height + 8
-    color: Colour.surfaceContainerHigh //"transparent"
+    color: Colour.surfaceContainer //"transparent"
     radius: 8
 
     Grid {

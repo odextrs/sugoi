@@ -42,7 +42,7 @@ Scope {
                 columnSpacing: 0
                 rowSpacing: 0
 
-                SectionStart {}
+                SectionStart { screen: modelData }
                 SectionCenter {}
                 SectionEnd {}
             }

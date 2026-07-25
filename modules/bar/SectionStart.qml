@@ -7,6 +7,10 @@ import qs.widgets
 import "widgets"
 
 Item {
+    id: root
+    
+    property var screen
+
     Layout.fillHeight: true
     Layout.fillWidth: true
 
@@ -30,6 +34,6 @@ Item {
             leftMargin: ShellStates.flags.bar.barVertical ? undefined : 8
         }
 
-        Workspace {}
+        Workspace { screen: root.screen }
     }
 }

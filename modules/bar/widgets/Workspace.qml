@@ -7,12 +7,13 @@ import qs.widgets
 import qs.config
 
 Rectangle {
-    color: Colour.surfaceContainerHigh
+    color: Colour.surfaceContainer
     radius: 8
     height: workspaceGrid.height
     width: workspaceGrid.width
 
     property var workspacesData: [];
+    property var screen
 
     Process {
         running: true  
@@ -21,7 +22,7 @@ Rectangle {
             onRead: data => {
                 let event = JSON.parse(data);
                 if (event.WorkspacesChanged)
-                    workspacesData = event.WorkspacesChanged.workspaces.sort((a, b) => a.idx - b.idx);
+                    workspacesData = event.WorkspacesChanged.workspaces.filter(ws => ws.output === screen.name).sort((a, b) => a.idx - b.idx);
                 if (event.WorkspaceActivated)
                     workspacesJsonProcess.running = true
             }
@@ -34,7 +35,7 @@ Rectangle {
         command: ["niri", "msg", "-j", "workspaces"]
         stdout: SplitParser {
             onRead: data => {
-                workspacesData = JSON.parse(data).sort((a, b) => a.idx - b.idx);
+                workspacesData = JSON.parse(data).filter(ws => ws.output === screen.name).sort((a, b) => a.idx - b.idx);
             }
         }
     }
@@ -61,6 +62,8 @@ Rectangle {
                     anchors.centerIn: parent
                     text: workspacesData[index].idx
                     font.pixelSize: 14
+
+                    color: workspacesData[index].is_active ? Colour.secondaryContainerOn : Colour.surfaceVariantOn
                 }
             }
         }
