@@ -22,7 +22,7 @@ Item {
 
         QsButton {
             message: ""
-            messageSize: 32
+            messageSize: 20
             implicitWidth: 85
         }
 
@@ -45,7 +45,7 @@ Item {
         QsButton {
             message: ""
             implicitWidth: 60
-            messageSize: 32
+            messageSize: 20
             //buttonBackground: "transparent"
         }
 

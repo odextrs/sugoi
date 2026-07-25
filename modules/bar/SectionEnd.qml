@@ -40,7 +40,7 @@ Item {
         // -- quick settings button
         SugoiButton {
             message: ""
-            messageSize: 20
+            messageSize: 16
             messageColor: Colour.primary
             buttonBackground: "transparent"
 

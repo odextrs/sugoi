@@ -98,7 +98,7 @@ Scope {
                             required property string label
                             required property int page
                             message: label
-                            messageSize: 20
+                            messageSize: 16
 
                             buttonBackground: root.currentPage === page ? Colour.primary : button.hovered ? Colour.secondary : "transparent"
                             messageColor: root.currentPage === page ? Colour.secondaryOn : button.hovered ? Colour.secondaryOn : Colour.primary
