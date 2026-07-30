@@ -33,5 +33,9 @@ Singleton {
         property JsonObject appLauncher: JsonObject {
             property bool isActive: true
         }
+
+        property JsonObject quickSettings: JsonObject {
+            property bool isFocusable: true
+        }
     }
 }

@@ -23,11 +23,6 @@ Scope {
     Component { id: mainPanelComp; MainPanel{} }
     Component { id: mediaPanelComp; MediaPanel{} }
 
-    Shortcut {
-        sequence: "Escape"
-        onActivated: toggle()
-    }
-
     function toggle() {
         toggled = !toggled
         console.log ("qs toggle")
@@ -40,6 +35,14 @@ Scope {
         color: "transparent"
         visible: toggled
         exclusiveZone: 0
+
+        focusable: ShellStates.flags.quickSettings.isFocusable
+
+        //Wayland shortcut protocol WHENWHENWHEN
+        Shortcut {
+            sequence: "Escape"
+            onActivated: toggle()
+        }
 
         BackgroundEffect.blurRegion: Region { item: row }
 

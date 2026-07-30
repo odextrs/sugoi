@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.qml": "qml"
+  },
+  "qt-qml.qmlls.useQmlImportPathEnvVar": true,
+  "qt-qml.qmlls.enabled": true,
+  "qt-qml.qmlls.customExePath": "/usr/lib/qt6/bin/qmlls",
+  "terminal.integrated.env.linux": {
+    "QML2_IMPORT_PATH": "/usr/lib/qt6/qml"
+  }
+}

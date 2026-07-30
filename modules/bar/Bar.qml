@@ -21,6 +21,7 @@ Scope {
             SugoiRectangle {
                 id: panel
                 anchors.fill: parent
+                //color: Colour.surfaceContainer
                 opacity: 0.7
             }
 
