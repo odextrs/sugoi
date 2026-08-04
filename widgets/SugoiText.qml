@@ -16,6 +16,6 @@ Text {
     }
     FontLoader {
         id: googleSansFlex
-        source: Qt.resolvedUrl("../assets/fonts/google/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.ttf")
+        source: Qt.resolvedUrl("../assets/fonts/google/GoogleSansFlex-VariableFont.ttf")
     }
 }

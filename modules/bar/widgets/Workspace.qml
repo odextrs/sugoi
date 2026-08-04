@@ -7,7 +7,7 @@ import qs.widgets
 import qs.config
 
 Rectangle {
-    color: Colour.surfaceContainer
+    color: Qt.rgba ( Colour.surfaceContainer.r, Colour.surfaceContainer.g, Colour.surfaceContainer.b, 0.35 )
     radius: 8
     height: workspaceGrid.height
     width: workspaceGrid.width
@@ -16,7 +16,7 @@ Rectangle {
     property var screen
 
     Process {
-        running: true  
+        running: true
         command: ["niri", "msg", "-j", "event-stream"]
         stdout: SplitParser {
             onRead: data => {
@@ -56,14 +56,14 @@ Rectangle {
                 implicitHeight: 26
                 radius: 4
 
-                color: workspacesData[index].is_active ? Colour.secondaryContainer : "transparent"
+                color: workspacesData[index].is_active ? Colour.primary : "transparent"
 
                 SugoiText {
                     anchors.centerIn: parent
                     text: workspacesData[index].idx
                     font.pixelSize: 14
 
-                    color: workspacesData[index].is_active ? Colour.secondaryContainerOn : Colour.surfaceVariantOn
+                    color: workspacesData[index].is_active ? Colour.secondaryContainer : Colour.surfaceVariantOn
                 }
             }
         }

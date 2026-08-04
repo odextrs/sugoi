@@ -14,6 +14,7 @@ import "qsPages"
 Scope {
     id: root
     property bool toggled: false
+    property bool isEnabled: true
     property int currentPage: 0
     readonly property var pageComponents: [
         mainPanelComp,
@@ -23,9 +24,23 @@ Scope {
     Component { id: mainPanelComp; MainPanel{} }
     Component { id: mediaPanelComp; MediaPanel{} }
 
+    Timer {
+        id: hideTimer
+        interval: 210
+        repeat: false
+        onTriggered: root.isEnabled = false
+    }
+
     function toggle() {
-        toggled = !toggled
-        console.log ("qs toggle")
+        if ( toggled ) {
+            toggled = false
+            hideTimer.restart()
+            if ( PowerMenu.toggled === true ) { PowerMenu.toggle() }
+        } else {
+            hideTimer.stop()
+            isEnabled = true
+            toggled = true
+        }
     }
 
     SugoiPanelWindow {
@@ -33,24 +48,33 @@ Scope {
         implicitHeight: 200
         implicitWidth: 365
         color: "transparent"
-        visible: toggled
+        visible: isEnabled
         exclusiveZone: 0
 
-        focusable: ShellStates.flags.quickSettings.isFocusable
+        //focusable: ShellStates.flags.quickSettings.isFocusable
 
         //Wayland shortcut protocol WHENWHENWHEN
-        Shortcut {
-            sequence: "Escape"
-            onActivated: toggle()
-        }
+        //Shortcut {
+        //    sequence: "Escape"
+        //    onActivated: toggle()
+        //}
 
         BackgroundEffect.blurRegion: Region { item: row }
 
         property int slideOffset: toggled ? 10 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight
+        property int slideOffsetX: !toggled ? 10 : ShellStates.flags.bar.barVertical ? +implicitWidth : +implicitHeight
 
         Behavior on slideOffset {
             NumberAnimation {
                 id: slideY
+                duration: 250
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        Behavior on slideOffsetX {
+            NumberAnimation {
+                id: slideX
                 duration: 250
                 easing.type: Easing.OutCubic
             }
@@ -77,12 +101,7 @@ Scope {
             SugoiRectangle {
                 implicitWidth: 50
                 implicitHeight: bkg.height
-                color: Qt.rgba (
-                    Colour.surface.r,
-                    Colour.surface.g,
-                    Colour.surface.b,
-                    0.7
-                )
+                color: Qt.rgba ( Colour.surface.r, Colour.surface.g, Colour.surface.b, 0.7 )
                 topLeftRadius: 8
                 bottomLeftRadius: 8
 
@@ -119,12 +138,7 @@ Scope {
                 bottomRightRadius: 8
                 implicitWidth: bkg.width - 50
                 implicitHeight: bkg.height
-                color: Qt.rgba (
-                    Colour.surface.r,
-                    Colour.surface.g,
-                    Colour.surface.b,
-                    0.7
-                )
+                color: Qt.rgba ( Colour.surface.r, Colour.surface.g, Colour.surface.b, 0.7 )
 
                 Loader {
                     id: pageLoader

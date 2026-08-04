@@ -5,105 +5,114 @@ import Quickshell.Io
 import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
+
 import qs.widgets
 import qs.config
-
 
 Scope {
     id: root
     property bool toggled: false
+    property bool isEnabled: false
 
-    function toggle() {
-        toggled = !toggled
-        console.log ("power menu toggle")
+    Timer {
+        id: hideTimer
+        interval: 210
+        repeat: false
+        onTriggered: root.isEnabled = false
     }
 
-    LazyLoader {
-        active: toggled
+    function toggle() {
+        if (toggled) {
+            toggled = false
+            hideTimer.restart()
+        } else {
+            hideTimer.stop()
+            isEnabled = true
+            toggled = true
+        }
+    }
 
-        SugoiPanelWindow {
-            anchors.left: true
-            anchors.right: true
-            anchors.top: true
-            anchors.bottom: true
-            color: "transparent"
-            visible: toggled
-            exclusiveZone: 0
+    SugoiPanelWindow {
+        id: bkg
+        implicitHeight: 200
+        implicitWidth: 70
+        color: "transparent"
+        visible: isEnabled
 
-            focusable: true
+        Shortcut {
+            sequence: "Escape"
+            onActivated: toggle()
+        }
 
-            MouseArea {
-                anchors.fill: parent
-                acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
-                hoverEnabled: true
+        BackgroundEffect.blurRegion: Region { item: rect }
+        
+        property int slideOffset: toggled ? 385 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight
 
-                onClicked: (mouse) => toggled = false;
+        Behavior on slideOffset {
+            NumberAnimation {
+                id: slideY
+                duration: 250
+                easing.type: Easing.OutCubic
             }
+        }
 
-            property int slideOffset: toggled ? 0 : -implicitHeight
+        anchors {
+            bottom: ShellStates.flags.bar.barVertical
+            left: ShellStates.flags.bar.barVertical
+            top: !ShellStates.flags.bar.barVertical
+            right: !ShellStates.flags.bar.barVertical
+        }
 
-            Behavior on slideOffset {
-                NumberAnimation {
-                    id: slideY
-                    duration: 250
-                    easing.type: Easing.OutCubic
-                }
-            }
+        margins {
+            left: ShellStates.flags.bar.barVertical ? slideOffset : 10
+            bottom: 10
+            top: ShellStates.flags.bar.barVertical ? 10 : slideOffset
+            right: 10
+        }
 
-            Shortcut {
-                sequence: "Escape"
-                onActivated: toggled = false
-            }
+        SugoiRectangle {
+            id: rect
+            implicitWidth: 70
+            implicitHeight: bkg.height
+            color: Qt.rgba ( Colour.surface.r, Colour.surface.g, Colour.surface.b, 0.7 )
+            radius: 8
 
-            SugoiRectangle {
-                radius: 16
-                implicitHeight: 190
-                implicitWidth: 540
+            Column {
                 anchors.centerIn: parent
+                spacing: 5
 
-                GridLayout {
-                    anchors.centerIn: parent
-                    SugoiButton {
-                        message: "󰜉"
-                        messageSize: 86
-                        implicitHeight: 170
-                        implicitWidth: 170
-                        radius: 16
-                        onLeftClicked: rebootProcess.running = true
-                    }
-                    SugoiButton {
-                        message: "󰐥"
-                        messageSize: 90
-                        implicitHeight: 170
-                        implicitWidth: 170
-                        radius: 16
-                        onLeftClicked: shutdownProcess.running = true
-                    }
-                    SugoiButton {
-                        message: "󰤄"
-                        messageSize: 80
-                        implicitHeight: 170
-                        implicitWidth: 170
-                        radius: 16
-                        onLeftClicked: sleepProcess.running = true
-                    }
+                QsButton {
+                    implicitWidth: 60
+                    message: "󰐥"
+                    messageSize: 26
+                    onLeftClicked: shutdownProcess.running = true
+                }
+                QsButton {
+                    implicitWidth: 60
+                    message: "󰤄"
+                    messageSize: 20
+                    onLeftClicked: sleepProcess.running = true
+                }
+                QsButton {
+                    implicitWidth: 60
+                    message: "󰜉"
+                    messageSize: 20
+                    onLeftClicked: rebootProcess.running = true
                 }
             }
+        }
 
-            Process {
-                id: rebootProcess
-                command: ["systemctl", "reboot"]
-            }
-
-            Process {
-                id: shutdownProcess
-                command: ["systemctl", "poweroff"]
-            }
-
-            Process {
-                id: sleepProcess
-                command: ["systemctl", "suspend"]
-            }
+        Process {
+            id: rebootProcess
+            command: ["systemctl", "reboot"]
+        }
+        Process {
+            id: shutdownProcess
+            command: ["systemctl", "poweroff"]
+        }
+        Process {
+            id: sleepProcess
+            command: ["systemctl", "suspend"]
         }
     }
 }

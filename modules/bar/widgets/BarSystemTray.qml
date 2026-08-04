@@ -11,7 +11,7 @@ SugoiRectangle {
     property var activePopup: null
     implicitWidth: content.width + 8
     implicitHeight: content.height + 8
-    color: Colour.surfaceContainer
+    color: Qt.rgba ( Colour.surfaceContainer.r, Colour.surfaceContainer.g, Colour.surfaceContainer.b, 0.35 )
     radius: 8
 
     Grid {

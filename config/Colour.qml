@@ -8,22 +8,22 @@ Singleton {
     id: root
 
     // Primary
-    readonly property color primary: "#feb0d1"
-    readonly property color primaryOn: "#531d39"
-    readonly property color primaryContainer: "#6d3350"
-    readonly property color primaryContainerOn: "#ffd8e6"
+    readonly property color primary: "#d0bdfe"
+    readonly property color primaryOn: "#36265d"
+    readonly property color primaryContainer: "#4d3d75"
+    readonly property color primaryContainerOn: "#e9ddff"
 
     // Secondary
-    readonly property color secondary: "#e1bdca"
-    readonly property color secondaryOn: "#412a34"
-    readonly property color secondaryContainer: "#59404a"
-    readonly property color secondaryContainerOn: "#fed9e6"
+    readonly property color secondary: "#ccc2db"
+    readonly property color secondaryOn: "#332d41"
+    readonly property color secondaryContainer: "#4a4458"
+    readonly property color secondaryContainerOn: "#e8def8"
 
     // Tertiary
-    readonly property color tertiary: "#f2bb98"
-    readonly property color tertiaryOn: "#49280f"
-    readonly property color tertiaryContainer: "#633e23"
-    readonly property color tertiaryContainerOn: "#ffdcc6"
+    readonly property color tertiary: "#efb8c8"
+    readonly property color tertiaryOn: "#4a2532"
+    readonly property color tertiaryContainer: "#633b48"
+    readonly property color tertiaryContainerOn: "#ffd9e2"
 
     // Error
     readonly property color error: "#ffb4ab"
@@ -32,24 +32,24 @@ Singleton {
     readonly property color errorContainerOn: "#ffdad6"
 
     // Surface
-    readonly property color background: "#191114"
-    readonly property color backgroundOn: "#eedfe3"
-    readonly property color surface: "#191114"
-    readonly property color surfaceOn: "#eedfe3"
-    readonly property color surfaceVariant: "#504348"
-    readonly property color surfaceVariantOn: "#d4c2c7"
-    readonly property color surfaceContainer: "#251d20"
-    readonly property color surfaceContainerLow: "#21191c"
-    readonly property color surfaceContainerHigh: "#30282b"
-    readonly property color surfaceContainerHighest: "#3b3235"
-    readonly property color surfaceContainerLowest: "#130c0f"
+    readonly property color background: "#141218"
+    readonly property color backgroundOn: "#e6e0e9"
+    readonly property color surface: "#141218"
+    readonly property color surfaceOn: "#e6e0e9"
+    readonly property color surfaceVariant: "#49454e"
+    readonly property color surfaceVariantOn: "#cac4cf"
+    readonly property color surfaceContainer: "#211f24"
+    readonly property color surfaceContainerLow: "#1d1b20"
+    readonly property color surfaceContainerHigh: "#2b292f"
+    readonly property color surfaceContainerHighest: "#36343a"
+    readonly property color surfaceContainerLowest: "#0f0d13"
 
     // Outline / misc
-    readonly property color outline: "#9d8c92"
-    readonly property color outlineVariant: "#504348"
-    readonly property color inverseSurface: "#eedfe3"
-    readonly property color inverseSurfaceOn: "#372e31"
-    readonly property color inversePrimary: "#894a68"
+    readonly property color outline: "#948f99"
+    readonly property color outlineVariant: "#49454e"
+    readonly property color inverseSurface: "#e6e0e9"
+    readonly property color inverseSurfaceOn: "#322f35"
+    readonly property color inversePrimary: "#65558f"
     readonly property color shadow: "#000000"
     readonly property color scrim: "#000000"
 }

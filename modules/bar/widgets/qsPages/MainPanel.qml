@@ -22,7 +22,7 @@ Item {
 
         QsButton {
             message: ""
-            messageSize: 20
+            messageSize: 16
             implicitWidth: 85
         }
 
@@ -38,7 +38,7 @@ Item {
 
         QsButton {
             message: "󰂯"
-            messageSize: 24
+            messageSize: 20
             implicitWidth: 85
         }
 
@@ -50,12 +50,16 @@ Item {
         }
 
         QsButton {
-            message: "we"
+            isMonospace: false
+            messageSize: 12
+            message: "<null>"
         }
 
         QsButton {
             Layout.columnSpan: 2
-            message: "wewe"
+            isMonospace: false
+            messageSize: 12
+            message: "<null>"
         }
     }
 }
