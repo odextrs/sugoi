@@ -21,6 +21,12 @@ SugoiRectangle {
         }
 
         SugoiText {
+            text: ":"
+            visible: !ShellStates.flags.bar.barVertical
+            font.pixelSize: 14
+        }
+
+        SugoiText {
             text: Qt.formatDateTime(clock.date, "mm")
             font.pixelSize: 14
         }

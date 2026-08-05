@@ -41,7 +41,7 @@ Scope {
 
         BackgroundEffect.blurRegion: Region { item: rect }
         
-        property int slideOffset: toggled ? 385 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight
+        property int slideOffset: toggled ? 385 : ShellStates.flags.bar.barVertical ? -implicitWidth : implicitHeight - 200
 
         Behavior on slideOffset {
             NumberAnimation {
@@ -61,8 +61,8 @@ Scope {
         margins {
             left: ShellStates.flags.bar.barVertical ? slideOffset : 10
             bottom: 10
-            top: ShellStates.flags.bar.barVertical ? 10 : slideOffset
-            right: 10
+            top: 10
+            right: ShellStates.flags.bar.barVertical ? 10 : slideOffset
         }
 
         SugoiRectangle {

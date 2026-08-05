@@ -38,8 +38,7 @@ Item {
             onRead: function(line) {
                 const e = JSON.parse(line)
 
-                if (e.WindowFocusChanged)
-                    focusedWindow.running = true
+                if (e.WindowFocusChanged) focusedWindow.running = true
             }
         }
     }
