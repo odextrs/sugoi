@@ -5,6 +5,8 @@ import QtQuick.Layouts
 import qs.widgets
 import qs.config
 
+import "miscPanels"
+
 Item {
     id: mainQsPage
 
@@ -24,6 +26,7 @@ Item {
             message: ""
             messageSize: 16
             implicitWidth: 85
+            onLeftClicked: { NetworkPanel.toggle() }
         }
 
         QsButton {

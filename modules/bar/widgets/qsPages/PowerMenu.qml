@@ -39,11 +39,6 @@ Scope {
         color: "transparent"
         visible: isEnabled
 
-        Shortcut {
-            sequence: "Escape"
-            onActivated: toggle()
-        }
-
         BackgroundEffect.blurRegion: Region { item: rect }
         
         property int slideOffset: toggled ? 385 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight
@@ -96,7 +91,7 @@ Scope {
                 QsButton {
                     implicitWidth: 60
                     message: "󰜉"
-                    messageSize: 20
+                    messageSize: 24
                     onLeftClicked: rebootProcess.running = true
                 }
             }

@@ -24,5 +24,7 @@ Item {
         anchors {
             centerIn: parent
         }
+
+        WindowTitle {}
     }
 }

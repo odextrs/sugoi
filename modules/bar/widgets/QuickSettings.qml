@@ -8,8 +8,7 @@ import qs.widgets
 import qs.config
 
 import "qsPages"
-
-// todo: quick settings panel
+import "qsPages/miscPanels"
 
 Scope {
     id: root
@@ -36,6 +35,7 @@ Scope {
             toggled = false
             hideTimer.restart()
             if ( PowerMenu.toggled === true ) { PowerMenu.toggle() }
+            if ( NetworkPanel.toggled === true ) { NetworkPanel.toggle() }
         } else {
             hideTimer.stop()
             isEnabled = true
@@ -50,14 +50,6 @@ Scope {
         color: "transparent"
         visible: isEnabled
         exclusiveZone: 0
-
-        //focusable: ShellStates.flags.quickSettings.isFocusable
-
-        //Wayland shortcut protocol WHENWHENWHEN
-        //Shortcut {
-        //    sequence: "Escape"
-        //    onActivated: toggle()
-        //}
 
         BackgroundEffect.blurRegion: Region { item: row }
 

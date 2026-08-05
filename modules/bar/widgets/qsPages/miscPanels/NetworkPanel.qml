@@ -1,22 +1,101 @@
-import QtQuick
+pragma Singleton
+
 import Quickshell
+import Quickshell.Io
 import Quickshell.Wayland
+import QtQuick
+import QtQuick.Layouts
 
-import qs.config
 import qs.widgets
+import qs.config
+import ".."
 
-//todo
 Scope {
     id: root
     property bool toggled: false
+    property bool isEnabled: false
+
+    Timer {
+        id: hideTimer
+        interval: 210
+        repeat: false
+        onTriggered: root.isEnabled = false
+    }
+
+    function toggle() {
+        if (toggled) {
+            toggled = false
+            hideTimer.restart()
+        } else {
+            hideTimer.stop()
+            isEnabled = true
+            toggled = true
+        }
+    }
 
     SugoiPanelWindow {
+        id: bkg
+        implicitHeight: 200
+        implicitWidth: 70
+        color: "transparent"
+        visible: isEnabled
 
-        focusable: ShellStates.flags.quickSettings.isFocusable
+        BackgroundEffect.blurRegion: Region { item: rect }
+        
+        property int slideOffset: toggled ? 220 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight
 
-        Shortcut {
-            sequence: "Escape"
-            onActivated: toggle()
+        Behavior on slideOffset {
+            NumberAnimation {
+                id: slideY
+                duration: 250
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        anchors {
+            bottom: ShellStates.flags.bar.barVertical
+            left: ShellStates.flags.bar.barVertical
+            top: !ShellStates.flags.bar.barVertical
+            right: !ShellStates.flags.bar.barVertical
+        }
+
+        margins {
+            left: 10
+            bottom: ShellStates.flags.bar.barVertical ? slideOffset : 10
+            top: ShellStates.flags.bar.barVertical ? 10 : slideOffset
+            right: 10
+        }
+
+        SugoiRectangle {
+            id: rect
+            implicitWidth: 70
+            implicitHeight: bkg.height
+            color: Qt.rgba ( Colour.surface.r, Colour.surface.g, Colour.surface.b, 0.7 )
+            radius: 8
+
+            Column {
+                anchors.centerIn: parent
+                spacing: 5
+
+                QsButton {
+                    implicitWidth: 60
+                    message: "󰐥"
+                    messageSize: 26
+                    //onLeftClicked:
+                }
+                QsButton {
+                    implicitWidth: 60
+                    message: "󰤄"
+                    messageSize: 20
+                    //onLeftClicked:
+                }
+                QsButton {
+                    implicitWidth: 60
+                    message: "󰜉"
+                    messageSize: 24
+                    //onLeftClicked:
+                }
+            }
         }
     }
 }
