@@ -3,11 +3,14 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
+import Quickshell.Networking
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 
 import qs.widgets
 import qs.config
+import qs.services
 import ".."
 
 Scope {
@@ -26,23 +29,26 @@ Scope {
         if (toggled) {
             toggled = false
             hideTimer.restart()
+            SugoiNetwork.toggled = false
         } else {
             hideTimer.stop()
             isEnabled = true
             toggled = true
+            SugoiNetwork.toggled = true
+            SugoiNetwork.scan
         }
     }
 
     SugoiPanelWindow {
         id: bkg
-        implicitHeight: 200
-        implicitWidth: 70
+        implicitHeight: 400
+        implicitWidth: 365
         color: "transparent"
         visible: isEnabled
 
         BackgroundEffect.blurRegion: Region { item: rect }
         
-        property int slideOffset: toggled ? 220 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight
+        property real slideOffset: toggled ? 220 : ShellStates.flags.bar.barVertical ? -implicitWidth + 200 : -implicitHeight
 
         Behavior on slideOffset {
             NumberAnimation {
@@ -68,32 +74,33 @@ Scope {
 
         SugoiRectangle {
             id: rect
-            implicitWidth: 70
+            implicitWidth: 365
             implicitHeight: bkg.height
             color: Qt.rgba ( Colour.surface.r, Colour.surface.g, Colour.surface.b, 0.7 )
             radius: 8
 
-            Column {
-                anchors.centerIn: parent
-                spacing: 5
+            ScrollView {
+                anchors.fill: parent
 
-                QsButton {
-                    implicitWidth: 60
-                    message: "󰐥"
-                    messageSize: 26
-                    //onLeftClicked:
-                }
-                QsButton {
-                    implicitWidth: 60
-                    message: "󰤄"
-                    messageSize: 20
-                    //onLeftClicked:
-                }
-                QsButton {
-                    implicitWidth: 60
-                    message: "󰜉"
-                    messageSize: 24
-                    //onLeftClicked:
+                Column {
+                    id: col
+                    width: parent.width
+                    spacing: 8
+
+                    Repeater {
+                        model: SugoiNetwork.availableWifi
+
+                        delegate: QsButton {
+                            required property var modelData
+                            width: 360
+                            implicitHeight: 40
+                            message: modelData.ssid
+                            messageSize: 15
+                            onLeftClicked: {
+                                SugoiNetwork.connect(modelData.ssid)
+                            }
+                        }
+                    }
                 }
             }
         }

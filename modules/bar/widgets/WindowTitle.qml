@@ -13,6 +13,7 @@ Item {
     SugoiText {
         id: title
         text: focusedTitle
+        isMonospace: false
 
         rotation: ShellStates.flags.bar.barVertical? 90 : 0
     }

@@ -1,9 +1,10 @@
 import Quickshell
-import Quickshell.Networking
 import QtQuick
 import QtQuick.Layouts
+
 import qs.widgets
 import qs.config
+import qs.services
 
 import "miscPanels"
 
@@ -23,8 +24,9 @@ Item {
         }
 
         QsButton {
-            message: ""
+            message: SugoiNetwork.isEnabled ? "󰤨" : "󰤭"
             messageSize: 16
+            buttonBackground: hovered ? Qt.rgba ( Colour.primary.r, Colour.primary.g, Colour.primary.b, 1.0 ) : SugoiNetwork.connected ? Colour.secondary : Qt.rgba ( Colour.secondaryContainer.r, Colour.secondaryContainer.g, Colour.secondaryContainer.b, 0.15 )
             implicitWidth: 85
             onLeftClicked: { NetworkPanel.toggle() }
         }
