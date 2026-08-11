@@ -46,7 +46,7 @@ Scope {
         color: "transparent"
         visible: isEnabled
 
-        BackgroundEffect.blurRegion: Region { item: rect }
+        BackgroundEffect.blurRegion: Region { item: rect; radius: rect.radius }
         
         property real slideOffset: toggled ? 10 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight + 40
 

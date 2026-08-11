@@ -18,7 +18,7 @@ SugoiPanelWindow {
     implicitHeight: Math.max(0, notifications.height)
     exclusiveZone: 0
 
-    BackgroundEffect.blurRegion: Region { item: notifications }
+    BackgroundEffect.blurRegion: Region { item: notifications; radius: 8 }
 
     anchors {
         top: true

@@ -12,17 +12,18 @@ Scope {
         model: Quickshell.screens
 
         SugoiPanelWindow {
-            required property var modelData //IMPORTANT!!
+            required property var modelData
             screen: modelData
             color: "transparent"
             
-            BackgroundEffect.blurRegion: Region { item: panel }
+            BackgroundEffect.blurRegion: Region { item: ShellStates.flags.bar.floatingWidgets ? null : panel; radius: panel.radius }
 
             SugoiRectangle {
                 id: panel
                 anchors.fill: parent
                 //color: Colour.surfaceContainer
                 opacity: 0.7
+                visible: !ShellStates.flags.bar.floatingWidgets
             }
 
             anchors {
@@ -43,7 +44,7 @@ Scope {
                 columnSpacing: 0
                 rowSpacing: 0
 
-                SectionStart { screen: modelData }
+                SectionStart { screen: modelData; }
                 SectionCenter {}
                 SectionEnd {}
             }
