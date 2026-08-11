@@ -53,20 +53,11 @@ Scope {
 
         BackgroundEffect.blurRegion: Region { item: row }
 
-        property real slideOffset: toggled ? 10 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight
-        property real slideOffsetX: !toggled ? 10 : ShellStates.flags.bar.barVertical ? +implicitWidth : +implicitHeight
+        property real slideOffset: toggled ? 10 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight - 160
 
         Behavior on slideOffset {
             NumberAnimation {
                 id: slideY
-                duration: 250
-                easing.type: Easing.OutCubic
-            }
-        }
-
-        Behavior on slideOffsetX {
-            NumberAnimation {
-                id: slideX
                 duration: 250
                 easing.type: Easing.OutCubic
             }
@@ -82,8 +73,8 @@ Scope {
         margins {
             left: ShellStates.flags.bar.barVertical ? slideOffset : 10
             bottom: 10
-            top: ShellStates.flags.bar.barVertical ? 10 : slideOffset
-            right: 10
+            top: 10
+            right: ShellStates.flags.bar.barVertical ? 10 : slideOffset
         }
 
         Row {

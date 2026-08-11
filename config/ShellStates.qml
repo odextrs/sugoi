@@ -15,7 +15,7 @@ Singleton {
 
         property JsonObject bar: JsonObject {
             property bool isActive: true
-            property bool barVertical: true
+            property bool barVertical: false
             property bool barFloating: false
             property int barSize: 40
             property bool floatingWidgets: false

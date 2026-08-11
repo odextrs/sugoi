@@ -41,7 +41,7 @@ Scope {
 
         BackgroundEffect.blurRegion: Region { item: rect }
         
-        property real slideOffset: toggled ? 385 : ShellStates.flags.bar.barVertical ? -implicitWidth : implicitHeight - 200
+        property real slideOffset: toggled ? 385 : ShellStates.flags.bar.barVertical ? -implicitWidth : implicitHeight - 250
 
         Behavior on slideOffset {
             NumberAnimation {
