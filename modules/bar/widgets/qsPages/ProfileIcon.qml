@@ -14,7 +14,7 @@ SugoiRectangle {
         id: pfpImage
         anchors.fill: parent
         anchors.margins: 3
-        source: "file:///usr/share/sddm/faces/" + Quickshell.env("USER") + ".face.icon" //yes sddm only for now, pls fix future someone
+        source: Quickshell.env("HOME") + "/.local/state/quickshell/user/profile.jpg" // quickshell exclusive pfp... maybe not a great idea
         fillMode: Image.PreserveAspectCrop
         smooth: true
         antialiasing: true
