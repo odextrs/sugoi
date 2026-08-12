@@ -14,29 +14,24 @@ Singleton {
         id: jsonAdapter
 
         property JsonObject bar: JsonObject {
-            property bool isActive: true
-            property bool barVertical: true
-            property bool barFloating: false
-            property int barSize: 40
-            property bool floatingWidgets: false
-            property bool floatingWidgetsBlur: false // <- this sucks btw - mori
-            property bool floatingCorners: false
+            property bool isActive: UserPreferences.bar.isActive ?? DefaultConfig.bar.isActive
+            property bool barVertical: UserPreferences.bar.barVertical ?? DefaultConfig.bar.barVertical
+            //property bool barFloating: UserPreferences.bar.barFloating ?? DefaultConfig.bar.barFloating
+            property int barSize: UserPreferences.bar.barSize ?? DefaultConfig.bar.barSize
+            property bool floatingWidgets: UserPreferences.bar.floatingWidgets ?? DefaultConfig.bar.floatingWidgets
+            property bool floatingWidgetsBlur: UserPreferences.bar.floatingWidgetsBlur ?? DefaultConfig.bar.floatingWidgetsBlur
 
             property JsonObject widgets: JsonObject {
-                property bool centerSection: true
+                property bool centerSection: UserPreferences.bar.widgets.centerSection ?? DefaultConfig.bar.widgets.centerSection
             }
         }
 
         property JsonObject notifications: JsonObject {
-            property bool isActive: true
+            property bool isActive: UserPreferences.notifications.isActive ?? DefaultConfig.notifications.isActive
         }
 
         property JsonObject appLauncher: JsonObject {
-            property bool isActive: true
-        }
-
-        property JsonObject quickSettings: JsonObject {
-            property bool isFocusable: true
+            property bool isActive: UserPreferences.appLauncher.isActive ?? DefaultConfig.appLauncher.isActive
         }
     }
 }
