@@ -19,10 +19,11 @@ Singleton {
             property bool barFloating: false
             property int barSize: 40
             property bool floatingWidgets: false
+            property bool floatingWidgetsBlur: false // <- this sucks btw - mori
             property bool floatingCorners: false
 
             property JsonObject widgets: JsonObject {
-                
+                property bool centerSection: true
             }
         }
 

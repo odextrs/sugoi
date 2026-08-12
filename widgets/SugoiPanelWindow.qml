@@ -7,7 +7,7 @@ PanelWindow {
     id: panel
     property string namespace: "sugoi"
     WlrLayershell.namespace: namespace
-
+    
     color: Colour.surface
 
     Behavior on color {

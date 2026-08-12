@@ -51,9 +51,9 @@ Scope {
         visible: isEnabled
         exclusiveZone: 0
 
-        BackgroundEffect.blurRegion: Region { item: blurArea; radius: blurArea.radius }
+        BackgroundEffect.blurRegion: Region { item: ShellStates.flags.bar.floatingWidgets ? null : blurArea; radius: blurArea.radius }
 
-        Rectangle { id: blurArea; anchors.fill: parent; color: "transparent"; radius: 8}
+        Rectangle { id: blurArea; anchors.fill: parent; color: ShellStates.flags.bar.floatingWidgets ? Colour.surface : "transparent"; radius: 8}
 
         property real slideOffset: toggled ? 10 : ShellStates.flags.bar.barVertical ? -implicitWidth : -implicitHeight - 160
 

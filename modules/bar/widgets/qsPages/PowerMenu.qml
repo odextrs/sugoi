@@ -39,7 +39,7 @@ Scope {
         color: "transparent"
         visible: isEnabled
 
-        BackgroundEffect.blurRegion: Region { item: rect; radius: rect.radius }
+        BackgroundEffect.blurRegion: Region { item: ShellStates.flags.bar.floatingWidgets ? null : rect; radius: rect.radius }
         
         property real slideOffset: toggled ? 385 : ShellStates.flags.bar.barVertical ? -implicitWidth : implicitHeight - 250
 
@@ -69,7 +69,7 @@ Scope {
             id: rect
             implicitWidth: 70
             implicitHeight: bkg.height
-            color: Qt.rgba ( Colour.surface.r, Colour.surface.g, Colour.surface.b, 0.7 )
+            color: ShellStates.flags.bar.floatingWidgets ? Colour.surface : Qt.rgba ( Colour.surface.r, Colour.surface.g, Colour.surface.b, 0.7 )
             radius: 8
 
             Column {

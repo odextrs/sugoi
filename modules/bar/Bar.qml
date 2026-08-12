@@ -16,7 +16,23 @@ Scope {
             screen: modelData
             color: "transparent"
             
-            BackgroundEffect.blurRegion: Region { item: ShellStates.flags.bar.floatingWidgets ? null : panel; radius: panel.radius }
+            BackgroundEffect.blurRegion: Region {
+                Region {
+                    item: ShellStates.flags.bar.floatingWidgets ? null: panel
+                }
+                Region {
+                    item: ShellStates.flags.bar.floatingWidgetsBlur ? center.background : null
+                    radius: ShellStates.flags.bar.floatingWidgetsBlur ? 8 : 0
+                }
+                Region {
+                    item: ShellStates.flags.bar.floatingWidgetsBlur ? start.background : null
+                    radius: ShellStates.flags.bar.floatingWidgetsBlur ? 8 : 0
+                }
+                Region {
+                    item: ShellStates.flags.bar.floatingWidgetsBlur ? end.background : null
+                    radius: ShellStates.flags.bar.floatingWidgetsBlur ? 8 : 0
+                }
+            }
 
             SugoiRectangle {
                 id: panel
@@ -44,9 +60,9 @@ Scope {
                 columnSpacing: 0
                 rowSpacing: 0
 
-                SectionStart { screen: modelData; }
-                SectionCenter {}
-                SectionEnd {}
+                SectionStart { id: start; screen: modelData; }
+                SectionCenter { id: center }
+                SectionEnd { id: end }
             }
         }
     }

@@ -3,7 +3,7 @@ import qs.config
 
 Rectangle {
     id: root
-
+    antialiasing: true
     color: Colour.surface //surfaceContainer
 
     Behavior on color {

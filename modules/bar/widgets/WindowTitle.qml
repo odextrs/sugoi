@@ -7,13 +7,30 @@ import qs.widgets
 
 Item {
     property string focusedTitle: ""
-    implicitWidth: title.implicitWidth
-    implicitHeight: title.implicitHeight
+    //implicitWidth: title.implicitWidth
+    //implicitHeight: title.implicitHeight
+    implicitWidth: ShellStates.flags.bar.barVertical ? title.implicitHeight : title.implicitWidth
+    implicitHeight: ShellStates.flags.bar.barVertical ? title.implicitWidth : title.implicitHeight
+
+    Behavior on implicitWidth {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.OutCubic
+        }
+    }
+
+    Behavior on implicitHeight {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.OutCubic
+        }
+    }
 
     SugoiText {
         id: title
         text: focusedTitle
         isMonospace: false
+        anchors.centerIn: parent
 
         rotation: ShellStates.flags.bar.barVertical? 90 : 0
     }

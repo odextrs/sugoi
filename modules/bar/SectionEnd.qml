@@ -7,16 +7,22 @@ import qs.widgets
 import "widgets"
 
 Item {
+    property alias background: sectionBkg
     Layout.fillHeight: true
     Layout.fillWidth: true
 
     SugoiRectangle {
-        visible: ShellStates.flags.bar.barFloating
-        color: "blue" // temp for dev
-        anchors.fill: parent
+        id: sectionBkg
+        visible: ShellStates.flags.bar.floatingWidgets
+        color: ShellStates.flags.bar.floatingWidgetsBlur ? "transparent" : Colour.surface
+        height: grid.height + 6
+        width: grid.width + 6
+        radius: 8
+        anchors.centerIn: grid
     }
 
     Grid {
+        id: grid
         columns: ShellStates.flags.bar.barVertical
         rows: !ShellStates.flags.bar.barVertical
         horizontalItemAlignment: Grid.AlignHCenter
