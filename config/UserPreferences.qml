@@ -30,6 +30,7 @@ Singleton {
 
             property JsonObject notifications: JsonObject {
                 property var isActive
+                property var doNotDisturb
             }
 
             property JsonObject appLauncher: JsonObject {

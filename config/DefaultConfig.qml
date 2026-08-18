@@ -24,6 +24,7 @@ Singleton {
 
     property JsonObject notifications: JsonObject {
         property bool isActive: true
+        property bool doNotDisturb: true
     }
 
     property JsonObject appLauncher: JsonObject {

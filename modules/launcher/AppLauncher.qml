@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -97,5 +98,12 @@ Scope {
         }
     }
 
+    }
+
+    IpcHandler {
+        target: "applauncher"
+        function toggle() {
+            isActive = !isActive;
+        }
     }
 }

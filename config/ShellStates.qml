@@ -28,6 +28,7 @@ Singleton {
 
         property JsonObject notifications: JsonObject {
             property bool isActive: UserPreferences.notifications.isActive ?? DefaultConfig.notifications.isActive
+            property bool doNotDisturb: UserPreferences.notifications.doNotDisturb ?? DefaultConfig.notifications.doNotDisturb
         }
 
         property JsonObject appLauncher: JsonObject {

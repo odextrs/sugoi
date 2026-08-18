@@ -2,14 +2,13 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Wayland
 import QtMultimedia
-import Quickshell.Services.Notifications
 
 import QtQuick
 import QtQuick.Layouts
 import qs.widgets
+import qs.services
+import qs.config
 
-// This got me thinking.... Should we just make the panel transparent by default?
-// Every time we create a panel window, we make it transparent...
 SugoiPanelWindow {
     id: root
     color: "transparent"
@@ -33,20 +32,22 @@ SugoiPanelWindow {
         width: parent.width
 
         Repeater {
-            model: notificationService.trackedNotifications
-            SugoiRectangle {
-                required property var modelData
-                implicitWidth: parent.width
+            model: SugoiNotifications.getNotifications()
+
+            Loader {
+
+                //required property var modelData
+
+                active: !ShellStates.flags.notifications.doNotDisturb || (modelData.urgency > 1)
+
+                sourceComponent: SugoiRectangle {
+                id: notification
+
+                implicitWidth: notifications.width
                 implicitHeight: content.height + 16
                 radius: 8
 
                 opacity: 0.7
-
-                Timer {
-                    interval: 5000
-                    running: true
-                    onTriggered: modelData.tracked = false;
-                }
 
                 RowLayout {
                     id: content
@@ -87,7 +88,7 @@ SugoiPanelWindow {
                 }
 
                 /*
-                Some apps send a "suppress sound" hint (but somehow my discord doesn't?)
+                Some apps send a "suppress sound" hint
                 so we don't play our notification sound since it's already managed by the client.
                 https://specifications.freedesktop.org/notification/latest/hints.html
                 */
@@ -104,13 +105,15 @@ SugoiPanelWindow {
                     }
                 }
             }
+
+            Timer {
+                interval: 5000
+                running: true
+                onTriggered: modelData.tracked = false;
+            }
+
+            }
         }
 
-    }
-
-    // We will have to move it somewhere else if we want to add a notifications widget to our bar.
-    NotificationServer {
-        id: notificationService
-        onNotification: notification => notification.tracked = true;
     }
 }

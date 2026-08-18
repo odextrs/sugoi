@@ -41,7 +41,10 @@ Item {
 
         // -- modules
         BarSystemTray {}
-        Clock {}
+        //Clock {}
+        SugoiClock {
+            isVertical: ShellStates.flags.bar.barVertical
+        }
 
         // -- quick settings button
         SugoiButton {

@@ -49,8 +49,8 @@ Scope {
                 right: !ShellStates.flags.bar.barVertical
             }
 
-            implicitWidth: ShellStates.flags.bar.barVertical ? ShellStates.flags.bar.barSize : undefined
-            implicitHeight: !ShellStates.flags.bar.barVertical ? ShellStates.flags.bar.barSize : undefined
+            implicitWidth: ShellStates.flags.bar.barVertical ? ShellStates.flags.bar.barSize : modelData.width
+            implicitHeight: !ShellStates.flags.bar.barVertical ? ShellStates.flags.bar.barSize : modelData.height
 
             GridLayout {
                 anchors.fill: parent

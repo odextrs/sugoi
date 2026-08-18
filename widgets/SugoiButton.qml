@@ -47,21 +47,20 @@ Rectangle {
         acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
         hoverEnabled: true
 
+        cursorShape: Qt.PointingHandCursor
+
         onClicked: (mouse) => {
             switch (mouse.button) {
                 case Qt.LeftButton:
                     root.leftClicked()
                     break;
                 case Qt.RightButton:
-                    console.log("Right clicked!!!")
                     root.rightClicked()
                     break;
                 case Qt.MiddleButton:
-                    console.log("m3 clicked!!!")
                     root.middleClicked()
                     break;
             }
         }
     }
 }
-//https://doc.qt.io/qt-6/qml-qtquick-mousearea.html
