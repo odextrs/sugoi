@@ -114,8 +114,19 @@ ShellRoot {
                         interval: 3000
                         repeat: false
                         onTriggered: {
-                            if (!smt.unlockInProgress)
+                            if (!smt.unlockInProgress && psArea.text === "" && !psArea.hovered)
                                 psArea.opacity = 0;
+                        }
+                    }
+
+                    HoverHandler {
+                        id: psHover
+                        onHoveredChanged: {
+                            if (hovered) {
+                                smt.revealInput()
+                            } else if (psArea.text === "") {
+                                idleTimer.restart()
+                            }
                         }
                     }
                 }
