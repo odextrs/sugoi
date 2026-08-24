@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Io
+import Quickshell.Services.Pam
 import Quickshell.Wayland
 import QtQuick
 import QtQuick.Controls
@@ -21,9 +22,18 @@ ShellRoot {
 
             Image {
                 id: bg
-                source: Quickshell.env("HOME") + "/.local/state/quickshell/user/lockscreen.png"
-                height: smt.screen.height
-                width: smt.screen.width
+                //source: Quickshell.env("HOME") + "/.local/state/quickshell/user/lockscreen.png"
+                fillMode: Image.PreserveAspectCrop
+                anchors.fill: parent
+            }
+
+            FileView {
+                id: wpPath
+                path: Quickshell.env("HOME") + "/.local/state/quickshell/user/generated/wallpaper/path.txt"
+                watchChanges: true
+                onLoaded: {
+                    bg.source = text().trim()
+                }
             }
 
             MultiEffect {
@@ -33,38 +43,122 @@ ShellRoot {
                 blurEnabled: true
             }
 
-            ColumnLayout {
-                anchors.verticalCenter: parent.verticalCenter
+            SugoiClock {
+                anchors.centerIn: parent
+                size: 84
+            }
+
+            Item {
+                anchors.bottom: parent.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
-
-                spacing: 36
-
-                SugoiClock {
-                    anchors.centerIn: parent
-                    size: 84
-                }
+                anchors.bottomMargin: 20
+                implicitWidth: 320
+                implicitHeight: 40
 
                 TextField {
+                    id: psArea
+                    property real bkgOpacity: ShellStates.flags.bar.floatingWidgets ? 1.0 : 0.7
+                    anchors.centerIn: parent
                     background: SugoiRectangle {
                         color: Qt.rgba(
-                            Colour.surface.r,
-                            Colour.surface.g,
-                            Colour.surface.b,
-                            0.7
+                            Colour.surfaceContainerLow.r,
+                            Colour.surfaceContainerLow.g,
+                            Colour.surfaceContainerLow.b,
+                            psArea.bkgOpacity
                         )
                         radius: 8
                     }
-                    implicitWidth: 400
+                    implicitHeight: 40
+                    implicitWidth: 160
                     padding: 8
-                    font.pixelSize: 16
-                    placeholderText: "Password"
+                    font.pixelSize: 12
+                    color: Colour.primary
+                    placeholderText: smt.showFailure ? "Wrong Password" : "Password.."
+                    placeholderTextColor: Colour.primary
                     echoMode: TextInput.Password
+                    focus: true
+                    horizontalAlignment: TextInput.AlignHCenter
+                    opacity: smt.showFailure ? 0.9 : 0
+
+                    Component.onCompleted: smt.revealInput()
 
                     onAccepted: {
-                        lock.locked = false;
+                        smt.revealInput()
+                        smt.tryUnlock()
+                    }
+
+                    onTextChanged: {
+                        smt.currentText = text
+                        smt.revealInput()
+                    }
+
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: 850
+                            easing.type: Easing.OutCubic
+                        }
+                    }
+
+                    Timer {
+                        id: idleTimer
+                        interval: 3000
+                        repeat: false
+                        onTriggered: {
+                            if (!smt.unlockInProgress)
+                                psArea.opacity = 0;
+                        }
                     }
                 }
+            }
 
+            property string currentText: ""
+            property bool unlockInProgress: false
+            property bool showFailure: false
+
+            signal failed
+            signal unlocked
+
+            onCurrentTextChanged: showFailure = false
+
+            function revealInput() {
+                psArea.opacity = 1;
+                idleTimer.restart();
+            }
+
+            function reset() {
+                currentText = "";
+                unlockInProgress = false;
+                showFailure = false;
+            }
+
+            function tryUnlock() {
+                smt.unlockInProgress = true
+                pam.start()
+            }
+
+            PamContext {
+                id: pam
+                configDirectory: "pam"
+                config: "password.conf"
+
+                onPamMessage: {
+                    if (this.responseRequired)
+                        this.respond(smt.currentText)
+                }
+
+                onCompleted: result => {
+                    smt.unlockInProgress = false
+
+                    if (result === PamResult.Success) {
+                        smt.reset()
+                        lock.locked = false
+                        smt.unlocked()
+                    } else {
+                        smt.currentText = ""
+                        smt.showFailure = true
+                        smt.failed()
+                    }
+                }
             }
         }
     }
@@ -73,6 +167,10 @@ ShellRoot {
         target: "lock"
         function lock() {
             lock.locked = true;
+        }
+
+        function forceUnlock() {
+            lock.locked = false;
         }
     }
 }
