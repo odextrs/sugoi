@@ -57,7 +57,11 @@ Item {
         QsButton {
             isMonospace: false
             messageSize: 12
-            message: "<null>"
+            message: ShellStates.flags.notifications.doNotDisturb ? " ON" : " OFF"
+            onLeftClicked: { UserPreferences.notifications.doNotDisturb = !UserPreferences.notifications.doNotDisturb }
+            messageColor: ShellStates.flags.notifications.doNotDisturb ? (hovered ? Colour.secondaryOn : Colour.primaryOn) : (hovered ? Colour.primaryOn : Colour.primary)
+            buttonBackground: ShellStates.flags.notifications.doNotDisturb ? (hovered ? Colour.secondary : Colour.primary) : (hovered ? Colour.primary : Qt.rgba( Colour.secondaryContainer.r, Colour.secondaryContainer.g, Colour.secondaryContainer.b, 0.15 )
+          )
         }
 
         QsButton {
