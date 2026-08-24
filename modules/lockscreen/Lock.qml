@@ -55,11 +55,20 @@ ShellRoot {
                 implicitWidth: 320
                 implicitHeight: 40
 
+                MultiEffect {
+                    anchors.fill: psArea
+                    source: psBkg
+                    blur: 0.4
+                    blurEnabled: true
+                    opacity: psArea.opacity
+                }
+
                 TextField {
                     id: psArea
                     property real bkgOpacity: ShellStates.flags.bar.floatingWidgets ? 1.0 : 0.7
                     anchors.centerIn: parent
                     background: SugoiRectangle {
+                        id: psBkg
                         color: Qt.rgba(
                             Colour.surfaceContainerLow.r,
                             Colour.surfaceContainerLow.g,
@@ -78,7 +87,8 @@ ShellRoot {
                     echoMode: TextInput.Password
                     focus: true
                     horizontalAlignment: TextInput.AlignHCenter
-                    opacity: smt.showFailure ? 0.9 : 0
+                    opacity: 0
+                    cursorDelegate: Rectangle { width: 0; height: 0 }
 
                     Component.onCompleted: smt.revealInput()
 
@@ -167,10 +177,6 @@ ShellRoot {
         target: "lock"
         function lock() {
             lock.locked = true;
-        }
-
-        function forceUnlock() {
-            lock.locked = false;
         }
     }
 }
