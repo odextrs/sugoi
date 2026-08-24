@@ -20,6 +20,47 @@ ShellRoot {
             id: smt
             color: Colour.surface
 
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                acceptedButtons: Qt.NoButton
+
+                onPositionChanged: {
+                    smt.restartBurnInTimer()
+                }
+            }
+
+            Keys.onPressed: {
+                smt.restartBurnInTimer()
+            }
+
+            Timer {
+                id: idleTimerBurnIn
+                interval: 180000
+                repeat: false
+                running: true
+                onTriggered: {
+                    if (!smt.unlockInProgress)
+                        monitorOff.running = true
+                }
+            }
+
+            function restartBurnInTimer() {
+                monitorOn.running = true
+                idleTimerBurnIn.stop()
+                idleTimerBurnIn.start()
+            }
+
+            Process {
+                id: monitorOff
+                command: ["niri", "msg", "action", "power-off-monitors"]
+            }
+
+            Process {
+                id: monitorOn
+                command: ["niri", "msg", "action", "power-on-monitors"]
+            }
+
             Image {
                 id: bg
                 //source: Quickshell.env("HOME") + "/.local/state/quickshell/user/lockscreen.png"
